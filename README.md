@@ -30,6 +30,8 @@ Apply dark colored theme
 ./changeTheme.sh dark
 ```
 
+---
+
 Apply CAT colored theme (it's also dark)
 
 ```bash
