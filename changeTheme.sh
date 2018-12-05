@@ -8,10 +8,10 @@ then
 	cp ~/.themes/dot-themes/Dots* -r ~/.themes	
 
 	# Update VIM configuration
-	echo 'Updating vimrc...' 
-	echo "set number" > ~/.vimrc
-	echo 'syntax on' >> ~/.vimrc
-	echo 'set tabstop=4' >> ~/.vimrc
+	#echo 'Updating vimrc...' 
+	#echo "set number" > ~/.vimrc
+	#echo 'syntax on' >> ~/.vimrc
+	#echo 'set tabstop=4' >> ~/.vimrc
 
 	# Download Images
 	wget https://i.imgur.com/aSPQKgD.jpg -O ~/Downloads/dark.jpg
@@ -20,61 +20,21 @@ then
 
 	# Install Icons
 	apt install numix-icon-theme
-	
 
-	#####################
-	### File creation ###
-	#####################
-	if [[ ! -f ~/change-term.sh ]]; then 
-	# CREATE TERMINAL SWITCHER
-	cat <<EOT > ~/change-term.sh
-	#! /bin/bash
-	if ! [[ -f /usr/share/xfce4/terminal/colorschemes/\$1.theme ]]
-	then
-	    echo "No such colorscheme: \$1"
-	    exit 1
-	fi
-	cd ~/.config/xfce4/terminal
-	# strip settings from any themes
-	grep -Fxvf <(cat /usr/share/xfce4/terminal/colorschemes/*.theme) terminalrc > .terminalrc.tmp
-	grep -v -e Name -e Scheme "/usr/share/xfce4/terminal/colorschemes/\$1.theme" >> .terminalrc.tmp
-	cp terminalrc terminalrc.bak
-	mv .terminalrc.tmp terminalrc
-EOT
+	# Transfer change-term
 	chmod +x ~/change-term.sh
 	echo "File change-term created"
-	fi
 	
 	# Install Themes
 	if [[ ! -f /usr/share/xfce4/terminal/colorschemes/eighties.themes ]]; then 
-	cat <<EOT > /usr/share/xfce4/terminal/colorschemes/eighties.themes
-	[Scheme]
-	Name=eighties
-	ColorForeground=#d3d0c8
-	ColorBold=#d3d0c8
-	ColorBackground=#2d2d2d
-	ColorCursor=#d3d0c8
-	ColorPalette=#2d2d2d;#f2777a;#99cc99;#ffcc66;#6699cc;#cc99cc;#66cccc;#d3d0c8;#747369;#f2777a;#99cc99;#ffcc66;#6699cc;#cc99cc;#66cccc;#f2f0ec
-	ColorBoldUseDefault=FALSE
-EOT
-	echo "Theme Eighties created"
+	cp Colorschemes/eighties.themes /usr/share/xfce4/terminal/colorschemes/eighties.themes
+	echo "Colorscheme Eighties added"
 	fi
 	
 	if [[ ! -f /usr/share/xfce4/terminal/colorschemes/ashes.themes ]]; then 
-	cat <<EOT > /usr/share/xfce4/terminal/colorschemes/ashes.themes
-	[Scheme]
-	Name=ashes
-	ColorForeground=#c7ccd1
-	ColorBold=#c7ccd1
-	ColorBackground=#1c2023
-	ColorCursor=#c7ccd1
-	ColorPalette=#1c2023;#c7ae95;#95c7ae;#aec795;#ae95c7;#c795ae;#95aec7;#c7ccd1;#747c84;#c7ae95;#95c7ae;#aec795;#ae95c7;#c795ae;#95aec7;#f3f4f5
-	ColorBoldUseDefault=FALSE
-EOT
+	cp Colorschemes/ashes.themes /usr/share/xfce4/terminal/colorschemes/ashes.themes
+	echo "Created ColorScheme"
 	fi
-	############################
-	### END OF FILE CREATION ###
-	############################
 
 fi
 
